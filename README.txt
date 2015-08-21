@@ -5,6 +5,12 @@ http://www.tobias-erichsen.de/software/virtualmidi.html
 
 From my side (Oscar Sanz) qtkVirtualMIDI class can be freely used in any way according to MIT license.
 
+You can check how it works in my 'discoFever' application. This app gets MIDI data from virtualMIDI driver ad sends
+it via UDP to configured host. In the other side there is 'toniManero' app that will dance with the MIDI data received...
+
+https://github.com/oskrs111/pimcw/tree/master/discoFever
+https://github.com/oskrs111/pimcw/tree/master/toniManero
+
 How to compile it with virtualMIDI driver:
 1-Get virtualMIDI SDK from Tobias site http://www.tobias-erichsen.de/software/virtualmidi/virtualmidi-sdk.html
 2-Configure QtCreator project in order to set include path for 'teVirtualMIDI.h' header (from virtualMIDI SDK). 
