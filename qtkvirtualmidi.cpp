@@ -60,7 +60,7 @@ char* qtkVirtualMIDI::binToStr( const unsigned char *data, DWORD length )
 char* qtkVirtualMIDI::midiMessageToStr(struct midiMessage* message)
 {
     static char dumpBuffer[1024];
-    sprintf(dumpBuffer, "%s, channel=%02d, Data1=%03d, Data2=%03d",
+    sprintf(dumpBuffer, "%s, Ch=%02d, D1=%03d, D2=%03d",
             status2string[message->m_status],
             message->m_channel,
             message->m_data1,
@@ -69,7 +69,8 @@ char* qtkVirtualMIDI::midiMessageToStr(struct midiMessage* message)
     return dumpBuffer;
 }
 
-void CALLBACK qtkVirtualMIDI::teVMCallback( LPVM_MIDI_PORT midiPort, LPBYTE midiDataBytes, DWORD length, DWORD_PTR dwCallbackInstance ) {
+void CALLBACK qtkVirtualMIDI::teVMCallback( LPVM_MIDI_PORT midiPort, LPBYTE midiDataBytes, DWORD length, DWORD_PTR dwCallbackInstance )
+{
 
     if ( ( NULL == midiDataBytes ) || ( 0 == length ) ) {
         qDebug() << "qtkVirtualMIDI::teVMCallback, empty command - driver was probably shut down!\n";
@@ -79,6 +80,7 @@ void CALLBACK qtkVirtualMIDI::teVMCallback( LPVM_MIDI_PORT midiPort, LPBYTE midi
     {
 		LPBYTE p = midiDataBytes;
         struct midiMessage message;
+        if(length > MIDI_MESSAGE_LENGTH) qDebug() << "*" << length;
         for(int t = 0; t < length; t++)
         {
             memset(&message, 0x00, sizeof(message));
@@ -100,5 +102,4 @@ void CALLBACK qtkVirtualMIDI::teVMCallback( LPVM_MIDI_PORT midiPort, LPBYTE midi
             return;
         }
     }
-
 }
