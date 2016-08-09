@@ -17,7 +17,7 @@ struct midiMessage
             m_status :4;
 	quint8 m_data1;	
 	quint8 m_data2;
-	quint8 align__;
+        quint8 m_index; //OSLL: Used to discard repeated messages on reception...
 };
 
 static char* status2string[] =

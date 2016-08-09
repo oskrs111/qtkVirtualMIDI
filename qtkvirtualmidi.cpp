@@ -5,10 +5,9 @@
 qtkVirtualMIDI* qtkVirtualMIDI::p_this = 0;
 qtkVirtualMIDI::qtkVirtualMIDI(QObject *parent) : QObject(parent)
 {
-    qDebug() << "qtkVirtualMIDI, driver version: " << virtualMIDIGetVersion( NULL, NULL, NULL, NULL );
+    QString version = QString::fromLocal8Bit((const char*)virtualMIDIGetVersion( NULL, NULL, NULL, NULL ));
+    qDebug() << "qtkVirtualMIDI, driver version: " << version;
     qRegisterMetaType<midiMessage>("midiMessage");
-
-
 
     this->m_status = stUnknown;
     this->m_midiPort = virtualMIDICreatePortEx2( L"discoFever", qtkVirtualMIDI::teVMCallback, 0, MAX_SYSEX_BUFFER, TE_VM_FLAGS_PARSE_RX );
